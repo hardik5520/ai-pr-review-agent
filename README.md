@@ -9,9 +9,17 @@ all without any human intervention.
 
 ## 📸 Screenshots
 
-> Dashboard · Review Detail · Grafana Metrics
+### Dashboard — All Reviews
+![Dashboard](screenshots/dashboard.png)
 
-<!-- Add screenshots here after deployment -->
+### Review Detail — Full AI Review + Comments
+![Review Detail](screenshots/review-detail.png)
+
+### Trends — PRs per Contributor
+![Trends](screenshots/trends.png)
+
+### Grafana — Live Metrics
+![Grafana](screenshots/grafana.png)
 
 ---
 
