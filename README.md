@@ -7,22 +7,6 @@ all without any human intervention.
 
 ---
 
-## 📸 Screenshots
-
-### Dashboard — All Reviews
-![Dashboard](screenshots/dashboard.png)
-
-### Review Detail — Full AI Review + Comments
-![Review Detail](screenshots/review-detail.png)
-
-### Trends — PRs per Contributor
-![Trends](screenshots/trends.png)
-
-### Grafana — Live Metrics
-![Grafana](screenshots/grafana.png)
-
----
-
 ## 🏗️ Architecture
 
 ```
@@ -238,3 +222,19 @@ ai-pr-review-agent/
 - Webhook requests are validated with HMAC-SHA256 using a shared secret
 - Dashboard is protected with JWT — login required to view any data
 - All secrets are externalized via `application.yml` (gitignored) — never committed
+
+---
+
+## 📸 Screenshots
+
+### Dashboard — All Reviews
+![Dashboard](screenshots/dashboard.png)
+
+### Review Detail — Full AI Review + Comments
+![Review Detail](screenshots/review-detail.png)
+
+### Trends — PRs per Contributor
+![Trends](screenshots/trends.png)
+
+### Grafana — Live Metrics
+![Grafana](screenshots/grafana.png)
