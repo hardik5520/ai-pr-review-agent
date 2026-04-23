@@ -230,9 +230,3 @@ ai-pr-review-agent/
 - Webhook requests are validated with HMAC-SHA256 using a shared secret
 - Dashboard is protected with JWT — login required to view any data
 - All secrets are externalized via `application.yml` (gitignored) — never committed
-
----
-
-## 📝 License
-
-MIT
