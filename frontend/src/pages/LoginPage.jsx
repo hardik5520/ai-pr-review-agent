@@ -36,7 +36,7 @@ export default function LoginPage() {
     setError(''); // clear any previous error
 
     try {
-      const response = await fetch('http://localhost:8080/auth/login', {
+      const response = await fetch('https://ai-pr-review-agent-production.up.railway.app/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

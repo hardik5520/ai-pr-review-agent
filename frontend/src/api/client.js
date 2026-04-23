@@ -1,5 +1,6 @@
 // Base URL of the Spring Boot backend
-const BASE_URL = 'http://localhost:8080';
+// In production this points to the Railway deployment
+const BASE_URL = 'https://ai-pr-review-agent-production.up.railway.app';
 
 /**
  * Central fetch wrapper for all API calls.

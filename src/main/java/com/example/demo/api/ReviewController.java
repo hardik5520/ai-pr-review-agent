@@ -30,7 +30,7 @@ import java.util.List;
  * All endpoints are protected by JWT — the JwtAuthFilter runs before every
  * request and blocks unauthenticated callers with a 401.
  */
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173", "https://ai-pr-review-agent.vercel.app"})
 // Allows the React dev server (Vite default port 5173) to call these endpoints.
 // Without this, browsers block cross-origin requests (CORS policy).
 // In production this would be locked to the real frontend domain.

@@ -80,7 +80,10 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         // Allow requests from React dev server
-        config.setAllowedOrigins(List.of("http://localhost:5173"));
+        config.setAllowedOrigins(List.of(
+            "http://localhost:5173",
+            "https://ai-pr-review-agent.vercel.app"
+        ));
 
         // Allow these HTTP methods from the frontend
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
