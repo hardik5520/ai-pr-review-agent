@@ -1,0 +1,22 @@
+# Prometheus configuration file
+# This tells Prometheus HOW OFTEN to scrape and WHERE to scrape from
+
+global:
+  # How frequently Prometheus collects metrics from all targets
+  # Every 15 seconds it will hit /actuator/prometheus on our Spring Boot app
+  scrape_interval: 15s
+
+scrape_configs:
+  # Each entry here is a "job" — a target Prometheus should scrape
+  - job_name: 'pr-review-agent'
+
+    # The list of hosts to scrape for this job
+    static_configs:
+      - targets: ['app:8080']
+        # 'app' refers to the service name in docker-compose.yml — not localhost.
+        # Inside Docker's internal network, containers talk to each other by service name.
+        # So Prometheus (running as a container) reaches Spring Boot at http://app:8080
+
+    # Prometheus will append this path to each target to get the metrics endpoint
+    # Full URL it scrapes: http://app:8080/actuator/prometheus
+    metrics_path: '/actuator/prometheus'

@@ -1,0 +1,5 @@
+/* These three lines import Tailwind's base styles, component styles, and utility classes.
+   Without these, none of the Tailwind classes (like bg-gray-900, text-white, p-4) will work. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

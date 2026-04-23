@@ -1,0 +1,64 @@
+services:
+
+  # ─── PostgreSQL ────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: pr_review
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    # Named volume so data survives container restarts
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # ─── Spring Boot App ───────────────────────────────────────────────────────
+  app:
+    # Build from the Dockerfile in the current directory
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      # Override the datasource URL — inside Docker network, postgres is reachable by service name
+      # "localhost" would not work here because each container has its own localhost
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/pr_review
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+    depends_on:
+      # Ensures postgres starts before the app, but does NOT guarantee postgres is ready.
+      # Spring Boot will retry the connection automatically on startup.
+      - postgres
+
+  # ─── Prometheus ────────────────────────────────────────────────────────────
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      # Mount our prometheus.yml config into the container
+      # Prometheus reads this file to know what to scrape
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - app
+
+  # ─── Grafana ───────────────────────────────────────────────────────────────
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      # Default admin credentials for Grafana UI
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      # Persist Grafana dashboards and settings across restarts
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+# Named volumes — Docker manages these on disk
+# Data inside survives docker-compose down but is cleaned up with docker-compose down -v
+volumes:
+  postgres_data:
+  grafana_data:
